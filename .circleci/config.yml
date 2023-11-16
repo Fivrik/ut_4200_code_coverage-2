@@ -31,7 +31,7 @@ jobs:
           command: cat .npm/_logs/2023-11-16T16_17_26_353Z-debug.log
       - run:
           name: Check if the "package.json" file exists in the correct location
-          command: ls /home/circleci//project/package.json
+          command: ls /home/circleci/project/package.json
       - run:
           name: If the file exists but is not being found, check its permissions
           command: ls -l /home/circleci/project/package.json
