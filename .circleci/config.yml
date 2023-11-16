@@ -9,17 +9,6 @@ orbs:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   build:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
-    docker:
-      - image: circleci/node:latest
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: Print current working directoryjobs:
-  build:
     executor: node/default
     steps:
       - checkout
@@ -32,3 +21,65 @@ jobs:
       - store_artifacts:
           path: coverage
           destination: coverage
+          command: pwd
+      - run:
+          name: List contents of the directory
+          command: ls -l ut_4200_code_coverage-2
+      - run:
+          name: List contents of the directory with package.json
+          command: ls -la ut_4200_code_coverage-2
+      - run:
+          name: Print npm debug logs
+          command: cat .npm/_logs/2023-11-16T16_17_26_353Z-debug.log
+      - run:
+          name: Check if the "package.json" file exists in the correct location
+          command: ls ut_4200_code_coverage-2/package.json
+      - run:
+          name: If the file exists but is not being found, check its permissions
+          command: ls -l ut_4200_code_coverage-2/package.json
+      - run:
+          name: Change file permissions if needed
+          command: chmod +r ut_4200_code_coverage-2/package.json
+      - restore_cache:
+          keys:
+             - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: List contents of the directory with detailed information
+          command: ls -la ut_4200_code_coverage-2
+      - run:
+          name: Print npm debug logs
+          command: cat .npm/_logs/2023-11-16T16_23_59_504Z-debug.log
+      - run:
+          name: Check directory permissions
+          command: ls -l ut_4200_code_coverage-2
+      - run:
+          name: Verify the file path
+          command: ls -l ut_4200_code_coverage-2/package.json
+      - run:
+          name: Print current working directory
+          command: pwd
+      - run:
+          name: List contents of the directory
+          command: ls -la ut_4200_code_coverage-2
+      - run:
+          name: Check file permissions
+          command: ls -l ut_4200_code_coverage-2/package.json
+      - run:
+          name: Install dependencies
+          command: npm ci --prefix ut_4200_code_coverage-2
+
+      - run:
+          name: Run tests
+          command: npm test
+          
+      - run:
+          name: Generate coverage report
+          command: npm run coverage
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
+      - store_artifacts:
+          path: coverage-report
