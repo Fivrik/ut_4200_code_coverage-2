@@ -13,10 +13,7 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
-      - checkout
-      - run:
-          name: Change directory
-          command: cd /home/circleci/ut_4200_code_coverage-2
+      - checkout  
       - run:
           name: Print current working directory
           command: pwd
