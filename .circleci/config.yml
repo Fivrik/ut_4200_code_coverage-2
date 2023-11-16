@@ -43,7 +43,7 @@ jobs:
              - v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: List contents of the directory with detailed information
-          command: ls -la /home/circleci/ut_4200_code_coverage-2
+          command: ls -la /circleci/ut_4200_code_coverage-2
       - run:
           name: Print npm debug logs
           command: cat ~//circleci/.npm/_logs/2023-11-16T16_23_59_504Z-debug.log
@@ -58,7 +58,7 @@ jobs:
           command: pwd
       - run:
           name: List contents of the directory
-          command: ls -la /home/circleci/ut_4200_code_coverage-2
+          command: ls -la /circleci/ut_4200_code_coverage-2
       - run:
           name: Check file permissions
           command: ls -l ~/circleci/ut_4200_code_coverage-2/package.json
