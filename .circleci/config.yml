@@ -22,7 +22,7 @@ jobs:
           command: pwd
       - run:
           name: List contents of the directory
-          command: ls -l /home/circleci/ut_4200_code_coverage-2
+          command: ls -l /home/circleci/project
       - run:
           name: List contents of the directory with package.json
           command: ls -la /home/circleci/ut_4200_code_coverage-2
